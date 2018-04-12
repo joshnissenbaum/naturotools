@@ -1,0 +1,105 @@
+<!--
+  Generated template for the FormulatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>NaturoTools</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <div class="wrapper" padding *ngIf="formulaProvider.formulaHerbs.length == 0">
+        <div class="message">
+            <div class="icon">
+                <ion-icon name="leaf"></ion-icon>
+            </div>
+            <h3>Please add herbs to your formula from the global dispensary first.</h3>
+        </div>
+    </div>
+
+    <div class="wrapper" padding *ngIf="formulaProvider.formulaHerbs.length > 0">
+
+        <ion-card class="card" *ngFor="let herb of formulaProvider?.formulaHerbs" style="border-bottom: 2px solid;" [style.border-bottom-color]="getBrandObject(herb).colour">
+            <ion-card-header>{{ herb?.common_name }} ({{ getBrandObject(herb).brand }})</ion-card-header>
+
+            <ion-fab right top>
+                <button ion-fab (click)="removeHerb(herb)">
+                    <ion-icon name="trash"></ion-icon>
+                </button>
+            </ion-fab>
+
+            <ion-card-content>
+                <strong style="text-transform: uppercase;">Actions</strong>
+
+                <ul>
+                    <li>
+                        <span *ngFor="let action of getActions(herb)">{{ action.action_name }}, </span>
+                    </li>
+                </ul>
+
+                <strong style="text-transform: uppercase;">Recommended Dosage</strong>
+                <br/>
+                {{ herb.weekly_dosage_range }}ml
+
+                <hr>
+
+                <ion-item>
+                    <ion-input [(ngModel)]="dosages[herb.id]" placeholder="Dosage (ml)"></ion-input>
+                </ion-item>
+
+            </ion-card-content>
+        </ion-card>
+
+        <hr>
+
+        <ion-card>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label>Dosage (ml)</ion-label>
+                    <ion-input [(ngModel)]="formula['ml']" placeholder="Dosage (ml)"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Times Daily</ion-label>
+                    <ion-input [(ngModel)]="formula['time']" placeholder="Times Daily"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>When To Take</ion-label>
+                    <ion-select [(ngModel)]="formula['frequency']">
+                        <ion-option>With Meals</ion-option>
+                        <ion-option>Before Meals</ion-option>
+                        <ion-option>After Meals</ion-option>
+                        <ion-option>Before Bed</ion-option>
+                        <ion-option>On Waking</ion-option>
+                        <ion-option>Away From Medications</ion-option>
+                        <ion-option>Away From Meals</ion-option>
+                    </ion-select>
+                </ion-item>
+
+                <hr>
+
+                <ion-item>
+                    <ion-textarea [(ngModel)]="formula['prac_notes']" placeholder="Practitioner Notes"></ion-textarea>
+                </ion-item>
+
+                <hr>
+
+                <div style="text-align: center;">
+                    <button (click)="dosageRules()" ion-button clear color="primary">Rules</button>
+                    <button (click)="createFormula()" ion-button clear color="lighterGreen">Create</button>
+                    <button ion-button clear color="danger">Clear</button>
+                </div>
+
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+</ion-content>

@@ -1,0 +1,33 @@
+page-dispensary {
+
+  .tile {
+    border-bottom: 2px solid #aedb38;
+  }
+
+  .card {
+    position: relative;
+  }
+
+  .add {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 20px;
+    font-size: 24px;
+    color: #a8e063;
+  }
+
+  .actions {
+    padding: 5px;
+  }
+
+  .fab {
+    background: linear-gradient(75deg, #76b852, #8DC26F);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+
+  .fab.ion-icon {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+
+}

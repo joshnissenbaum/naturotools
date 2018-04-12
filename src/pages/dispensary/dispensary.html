@@ -1,0 +1,111 @@
+<!--
+  Generated template for the DispensaryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>NaturoTools</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="main">
+
+    <ion-card class="card tile" style="text-align: center; padding: 10px;">
+        <ion-card-header><ion-icon (click)="expand('search')" [name]="showSearch ? 'arrow-down' : 'arrow-up'"></ion-icon></ion-card-header>
+        <ion-card-content id="search" class="animated" *ngIf="showSearch">
+        <ion-item>
+            <ion-label>Select Brands</ion-label>
+            <ion-select [(ngModel)]="brands" multiple="true">
+                <ion-option *ngFor="let brand of dispensaryProvider?.brands" value="{{ brand.id }}">{{ brand.brand }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+
+        <hr>
+
+        <button ion-button (click)="addActions(actions)" color="lighterGreen">
+            Actions
+        </button>
+
+        <div class="actions" *ngIf="actions.length > 0">
+            <hr>
+            <div style="font-weight: bold;" *ngFor="let action of actions">{{ getActionName(action) }} &middot; <a (tap)="deleteAction(action)" style="color: red; text-decoration: none;" href="#">Remove</a> </div>
+        </div>
+
+        <hr>
+
+        <button ion-button color="danger" (click)="clearFormula()">Clear</button>
+        <button ion-button color="primary" (click)="searchDispensary()">Search</button>
+        </ion-card-content>
+    </ion-card>
+
+    <hr *ngIf="herbs != null">
+
+    <div class="loading">
+        <ion-spinner *ngIf="loading == true"></ion-spinner>
+    </div>
+
+    <ion-card class="card" *ngIf="herbs != null">
+        <ion-card-content>
+            <ion-input placeholder="Search By Name"></ion-input>
+        </ion-card-content>
+    </ion-card>
+
+    <div class="results" *ngIf="herbs != null">
+        <ion-card class="card animated fadeIn" *ngFor="let result of herbs" style="border-bottom: 2px solid;" [style.border-bottom-color]="getBrandObject(result).colour">
+            <ion-card-header class="animated fadeIn" text-wrap>{{ result.common_name }} <span style="font-size: 14px;" [style.color]="getBrandObject(result).colour">({{ getBrandObject(result).brand }})</span><br/><span
+                    style="color: darkseagreen; font-size: 13px; font-weight: normal;"><strong>{{ result.latin_binomaial }}</strong></span>
+            </ion-card-header>
+
+            <ion-fab right top>
+                <button ion-fab (click)="addFormulaHerb(result)">
+                    <ion-icon name="add-circle"></ion-icon>
+                </button>
+            </ion-fab>
+
+            <ion-card-content class="animated fadeIn">
+                <ul style="padding-top: 0px;">
+                    <li><strong>Dosage Range (weekly):</strong> {{ result.weekly_dosage_range != '' ?
+                        result.weekly_dosage_range + 'ml' : 'N/A' }}
+                    </li>
+                    <li><strong>Pregnancy Category:</strong> {{ result.pregnancy_category != '' ?
+                        result.pregnancy_category : 'N/A' }}
+                    </li>
+                    <li><strong>Lactation Category:</strong> {{ result.lactation_category != '' ?
+                        result.lactation_category : 'N/A' }}
+                    </li>
+                </ul>
+
+                <div class="actions" *ngIf="result.actions.length != 0">
+                    <strong style="text-transform: uppercase;">Actions</strong>
+
+                    <ul>
+                        <li *ngFor="let action of getActions(result)">{{ action.action_name }}</li>
+                    </ul>
+                </div>
+
+                <div class="interactions" *ngIf="result.interactions.length != 0">
+                    <strong style="text-transform: uppercase;">Interactions</strong>
+
+                    <ul>
+                        <li *ngFor="let interaction of getInteractions(result)"><strong>{{ interaction.drug }}</strong> - {{
+                            interaction.interaction }}
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="flags" *ngIf="result.flags && result.flags.length != 0">
+                    <strong style="text-transform: uppercase;">Flags</strong>
+                    <br/>
+                    {{ getFlags(result)?.flag }}
+                </div>
+
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+</ion-content>

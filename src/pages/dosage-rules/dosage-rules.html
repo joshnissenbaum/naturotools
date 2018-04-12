@@ -1,0 +1,77 @@
+<!--
+  Generated template for the DosageRulesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-buttons start>
+            <button (click)="close()" ion-button clear color="light">Close</button>
+        </ion-buttons>
+        <ion-title>Dosage Rules</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <div class="info">
+        You can apply one child dosage rule at a time for your formula. The different formulas affect the normal adult dosage entered.
+    </div>
+
+    <ion-card class="card rule" style="border-bottom: 2px solid #568cbb;">
+        <ion-card-content>
+            <h3 class="title" style="color: #568cbb;">Youngs Rule</h3><br/>Based on Age
+
+            <ion-input [(ngModel)]="value" placeholder="8 years old"></ion-input>
+
+            <button ion-button clear color="secondary" (click)="applyRule('youngs_rule')">Apply</button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="card rule" style="border-bottom: 2px solid #efe05f;">
+        <ion-card-content>
+            <h3 class="title" style="color: #efe05f;">Ausbergers Rule</h3><br/>Based on Weight
+
+            <ion-input [(ngModel)]="value" placeholder="40kg"></ion-input>
+
+            <button ion-button clear color="secondary" (click)="applyRule('ausbergers_rule')">Apply</button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="card rule" style="border-bottom: 2px solid #eba64a;">
+        <ion-card-content>
+            <h3 class="title" style="color: #eba64a;">Frieds Rule</h3><br/>For Infants
+
+            <ion-input [(ngModel)]="value" placeholder="2 years old"></ion-input>
+
+            <button ion-button clear color="secondary" (click)="applyRule('frieds_rule')">Apply</button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="card rule" style="border-bottom: 2px solid #59b8a6;">
+        <ion-card-content>
+            <h3 class="title" style="color: #59b8a6;">Clarks Rule</h3><br/>Based on Weight
+
+            <ion-input [(ngModel)]="value" placeholder="35kg"></ion-input>
+
+            <button ion-button clear color="secondary" (click)="applyRule('clarks_rule')">Apply</button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="card rule" style="border-bottom: 2px solid #ba848a;">
+        <ion-card-content>
+            <h3 class="title" style="color: #ba848a;">Salisbury Rule</h3><br/>Children older than 2 years
+
+            <ion-input placeholder="4 years old"></ion-input>
+
+            <button ion-button clear color="secondary" (click)="applyRule('salisbury_rule')">Apply</button>
+        </ion-card-content>
+    </ion-card>
+
+    <div style="text-align: center;">
+        <button ion-button round color="danger">Remove Rule</button>
+    </div>
+
+</ion-content>
